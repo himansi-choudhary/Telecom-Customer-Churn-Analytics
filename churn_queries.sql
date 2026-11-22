@@ -107,3 +107,13 @@ SELECT
 FROM telco_churn_cleaned
 GROUP BY tenure_group
 ORDER BY MIN(tenure);
+
+
+-- 9. Retention Target Segment: Active Month-to-Month Subscribers
+-- Business Question: How many active Month-to-month accounts exist, and what is their total and average MRR?
+SELECT 
+    COUNT(*) AS active_m2m_customers,
+    ROUND(SUM(MonthlyCharges), 2) AS segment_mrr,
+    ROUND(AVG(MonthlyCharges), 2) AS avg_bill
+FROM telco_churn_cleaned
+WHERE Churn = 'No' AND Contract = 'Month-to-month';
